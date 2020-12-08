@@ -10,7 +10,7 @@ camera = findNode('Perspective')
 
 # Example 1.1:
 # Creating new nodes
-draftNode =
+draftNode = createNode('Transform', 'DraftNode', root)
 
 # Example 1.2:
 # Creating geometry and add them to the scenegraph
@@ -26,14 +26,11 @@ draftNode.addChild(box)
 
 # Example 1.3:
 # Move nodes in the scenegraph
-finalNode =
+finalNode = createNode('Transform', 'FinalNode', root)
 finalNode.setTranslation(0, 0, 100)
 
 planeNode = findNode('Plane Geometry')
 boxNode = findNode('Box Geometry')
-
-draftNode.subChild(planeNode)
-draftNode.subChild(boxNode)
 
 finalNode.addChild(planeNode)
 finalNode.addChild(boxNode)
@@ -41,19 +38,33 @@ finalNode.addChild(boxNode)
 # Example 2.0:
 # Create a camera viewpoint from the current camera
 viewpointName = 'New Viewpoint'
-addViewPoint(viewpointName, False)
-viewpoint = getViewpoint()
+viewpoint = vrCameraService.createViewpoint(viewpointName)
 
 # Example 3.0:
 # Create a basic phong material
+materialA = createMaterial("UPhongMaterial")
+materialA.setName("Material A")
+materialA.fields().setVec("diffuseColor", [1, 0, 0])
 
+materialB = createMaterial("UPhongMaterial")
+materialB.setName("Material B")
+materialB.fields().setVec("diffuseColor", [0, 1, 0])
 
 # Example 3.1:
 # Create a material switch and add the newly created materials
-
+materialSwitch = createMaterial("SwitchMaterial")
+materialSwitch.setName("Material Switch")
+materialSwitch.addMaterial(materialA)
+materialSwitch.addMaterial(materialB)
 
 # Example 3.2:
 # Apply the material switch to a geometry
+plane = findNode("Plane Geometry")
+box = findNode("Box Geometry")
+
+materialSwitch = findMaterial("Material Switch")
+plane.setMaterial(materialSwitch)
+box.setMaterial(materialSwitch)
 
 # Example 4.0
 # Create a variant set
