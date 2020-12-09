@@ -14,8 +14,9 @@ fontcolor = QColor.fromRgb(127, 24, 78)
 backgroundColor = QColor.fromRgb(34, 24, 78)
 
 materialAnnotation = vrAnnotationService.createAnnotation("MaterialAnnotation")
-materialAnnotation.setDefaultFontColor(fontcolor)
-materialAnnotation.setDefaultBackgroundColor(backgroundColor)
+materialAnnotation.setFontColor(fontcolor)
+materialAnnotation.setBackgroundColor(backgroundColor)
+materialAnnotation.setText("I like it!")
 
 # Example 2:
 # QVector4D, QVector3D, QVector2D
@@ -26,14 +27,33 @@ viewFrustum = camera.getFrustum()
 print("Frustum as QVector4D:", viewFrustum)
 
 # QVector3D
-trackingOrigin = vrDeviceService.getTrackingOrigin()
-print("Tracking Origin as QVector3D:", trackingOrigin)
+camera = vrCameraService.getActiveCamera()
+fromAtUp = vrCameraService.getActiveCamera().getFromAtUp()
+fromVector = fromAtUp.getFrom()
+atVector = fromAtUp.getAt()
+upVector = fromAtUp.getUp()
 
-x = 100
-y = 200
-z = 300
+print(fromVector)
+print(atVector)
+print(upVector)
+
+x = 0
+y = 0
+z = -300
 position = QVector3D(x, y, z)
-materialAnnotation.setPosition(position)
+matAnnotation = vrAnnotationService.findAnnotation("MaterialAnnotation")
+matAnnotation.setPosition(position)
 
 # QVector2D
-camera.setSensorSize(QVector2D(36, 24))
+camera = vrCameraService.getActiveCamera()
+camera.setSensorSize(QVector2D(10, 10))
+camera.updateFromPerspectiveMatch()
+
+#Example 3:
+# QMatrix4x4
+camera = vrCameraService.getActiveCamera()
+projectionMat = camera.getCustomProjectionMatrix()
+print(projectionMat)
+
+# Example:
+# Math operations

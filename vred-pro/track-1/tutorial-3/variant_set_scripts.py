@@ -7,7 +7,7 @@ allMaterials = getAllMaterials()
 # get all materials which name starts with "switch"
 switchMaterials = list(filter(lambda matPtr: matPtr.getName().startswith('switch'), allMaterials))
 
-# iterate all switch materials and process
+# iterate all switch materials
 for switchMaterial in switchMaterials:
     switchPtr = switchMaterial
     switchName = switchPtr.getName()
