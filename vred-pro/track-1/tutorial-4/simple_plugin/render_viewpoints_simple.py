@@ -1,7 +1,34 @@
-from vrKernelService import vrCameraService
 import vrFileIO
 import vrFileDialog
 import vrRenderSettings
+from PySide2 import QtCore, QtWidgets
+from shiboken2 import wrapInstance
+
+def vredMainWindow(): 
+    main_window_ptr = getMainWindow()
+    return wrapInstance(int(main_window_ptr), QtWidgets.QMainWindow)
+
+class CustomDialog(QtWidgets.QDialog):
+    def __init__(self, parent=None):
+        super(MyDialog, self).__init__(parent)
+
+        boxlayout = QtWidgets.QVBoxLayout(self)
+
+        self.lineedit = QtWidgets.QLineEdit()
+        boxlayout.addWidget(self.lineedit)
+
+        self.button = QtWidgets.QPushButton("Set Label")
+        self.button.clicked.connect(self.buttonClicked)
+        boxlayout.addWidget(self.button)
+
+        self.label = QtWidgets.QLabel()
+        boxlayout.addWidget(self.label)
+
+        self.setLayout(boxlayout)
+
+    def buttonClicked(self):
+        self.label.setText(self.lineedit.text())
+        self.lineedit.setText("")
 
 
 def renderViewpoints():
@@ -17,5 +44,6 @@ def renderViewpoints():
         vrRenderSettings.setRenderFilename("{}.jpg".format(name))
         vrRenderSettings.startRenderToFile(False)
 
-
-renderViewpoints()
+if __name__ == "__main__":
+    dialog = CustomDialog(vredMainWindow())
+    dialog.show()
