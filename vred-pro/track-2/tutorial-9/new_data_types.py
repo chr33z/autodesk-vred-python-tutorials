@@ -19,7 +19,7 @@ materialAnnotation.setBackgroundColor(backgroundColor)
 materialAnnotation.setText("I like it!")
 
 # Example 2:
-# QVector4D, QVector3D, QVector2D
+# QVector4D, QVector3D, QVector2D    
 
 # QVector4D
 camera = vrCameraService.getActiveCamera()
