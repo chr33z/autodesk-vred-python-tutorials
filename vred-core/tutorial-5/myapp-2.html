@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>My Custom App</title>
+        <style>
+            html, body {
+                padding: 0;
+                margin: 0;
+                width: 100vw;
+                height: 100vh;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            }
+
+            #page {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #stream-container {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+        </style>
+        <script>
+            function initializeStream() {
+                document.getElementById("stream-container").src = "http://localhost:8888/apps/VREDStream/index.html";
+            }
+
+            window.onload = function() {
+                initializeStream();
+                updateVariantSes();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="page">
+            <iframe id="stream-container" frameborder="0" overflow="hidden" scroll="no"></iframe> 
+        </div>
+    </body>
+</html>

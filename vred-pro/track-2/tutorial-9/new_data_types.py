@@ -1,9 +1,3 @@
-import PySide2.QtGui
-QColor = PySide2.QtGui.QColor
-QVector4D = PySide2.QtGui.QVector4D
-QVector3D = PySide2.QtGui.QVector3D
-QVector2D = PySide2.QtGui.QVector2D
-
 # Example 1
 # QColor:
 colorRed = QColor(255, 0, 0)
@@ -11,12 +5,19 @@ colorBlue = QColor(0, 255, 0)
 colorGreen = QColor(0, 0, 255)
 
 fontcolor = QColor.fromRgb(127, 24, 78)
-backgroundColor = QColor.fromRgb(34, 24, 78)
+backgroundColor = QColor.fromHsv(180, 255, 255)
 
-materialAnnotation = vrAnnotationService.createAnnotation("MaterialAnnotation")
-materialAnnotation.setFontColor(fontcolor)
-materialAnnotation.setBackgroundColor(backgroundColor)
-materialAnnotation.setText("I like it!")
+annotation = vrAnnotationService.createAnnotation("New Annotation")
+annotation.setFontColor(fontcolor)
+annotation.setBackgroundColor(backgroundColor)
+annotation.setText("I like it!")
+
+x = 0
+y = 0
+z = 300
+position = QVector3D(x, y, z)
+matAnnotation = vrAnnotationService.findAnnotation("MaterialAnnotation")
+matAnnotation.setPosition(position)
 
 # Example 2:
 # QVector4D, QVector3D, QVector2D    
@@ -33,9 +34,13 @@ fromVector = fromAtUp.getFrom()
 atVector = fromAtUp.getAt()
 upVector = fromAtUp.getUp()
 
-print(fromVector)
-print(atVector)
-print(upVector)
+print("From Vector:", fromVector)
+print("At Vector:", atVector)
+print("Up Vector:", upVector)
+
+cameraTangent = QVector3D.crossProduct((atVector - fromVector), upVector)
+cameraTangent.normalize()
+print("Cross product", cameraTangent)
 
 x = 0
 y = 0

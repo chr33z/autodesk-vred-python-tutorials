@@ -1,10 +1,6 @@
-# Example 1.0
 # Calculating with QtVectors
-import PySide2.QtGui
-QVector3D = PySide2.QtGui.QVector3D
-
 camera = vrCameraService.getActiveCamera()
-cameraTranslation = vrMathService.getTranslation(camera.getWorldTransform())
+cameraTranslation = camera.getTranslation()
 
 print("Distance to origin: ", cameraTranslation.length())
 print("Distance to origin (point): ", cameraTranslation.distanceToPoint(QVector3D(0,0,0)))

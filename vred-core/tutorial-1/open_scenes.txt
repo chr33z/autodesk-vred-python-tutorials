@@ -1,0 +1,2 @@
+# Open scenes using a GET request to send a python command via curl
+curl -G -v "http://localhost:8888/python" --data-urlencode "value=load('C:\ProgramData\Autodesk\VREDPro-13.0\examples\Automotive_Genesis.vpb')"

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Custom App</title>
+
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js"></script>
+        <script type="module" src="web-api-script.js"></script>
+    </head>
+    <body>
+        <div id="page">
+            <div id="add-annotations-container">
+                <h2>Annotations</h2>
+                <form id="annotationForm">
+                  <input name="name" type="text" placeholder="Name" required />
+                  <input name="description" type="text" placeholder="Description" required />
+                  <button type="submit">Add</button>
+                </form>
+                <ul id="annotations"></ul>
+            </div>
+
+            <!-- Variant Set Container -->
+            <div id="variant-set-container">
+                <h2>Variant Sets</h2>
+            </div>
+
+            <!-- Video Stream Container -->
+            <iframe id="stream-container" frameborder="0" overflow="hidden" scroll="no"></iframe> 
+
+            <!-- Python Terminal Container -->
+            <div class="python-interface">
+                <h2>Python</h2>
+                <div class="python-send-wrapper">
+                    <input id="python-value" type="text" placeholder="Enter your python code..."></input>
+                    <button onclick="executeTerminalCode(document.getElementById('python-value').value)">Send Python</button>
+                </div>
+                <textarea id="python-response"></textarea>
+            </div>
+        </div>
+    </body>
+</html>

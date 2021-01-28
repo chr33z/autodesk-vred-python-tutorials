@@ -1,12 +1,9 @@
-import PySide2.QtGui
-QVector3D = PySide2.QtGui.QVector3D
-
 groupNode = vrNodeService.findNode("Group")
 deleteNode(groupNode)
 
-numberOfBoxes = 100
+numberOfBoxes = 50
 boxSize = 50
-xStep = 50
+xStep = 125
 xRotationStep = 20
 z = 500
 radius = 400
@@ -27,9 +24,9 @@ for i in range(0, numberOfBoxes):
     boxScale = boxNode.getScale() * (1 + (i * 0.01))
     boxNode.setScale(boxScale)
     
-    boxLocalRotation = QVector3D(xRotationStep * i, 0, 0)
+    boxLocalRotation = QVector3D(xRotationStep, 0, 0) * i
     boxNode.setRotationAsEuler(boxLocalRotation)
     
-    boxNode.setWorldRotatePivot(QVector3D(0, 0, z + radius))
+    boxNode.setWorldRotatePivot(QVector3D(0, 0, 0))
     boxNode.setRotatePivotTranslation(QVector3D(0, 0, z + radius))
     

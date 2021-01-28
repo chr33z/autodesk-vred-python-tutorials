@@ -1,1 +1,5 @@
--prepython "print('Hello prepython')" -postpython "print('Hello postpython')"
+REM Example 1
+REM -prepython "print('Executed before file has loaded')" -postpython "print('Executed after file has loaded')"
+
+REM Example 2
+start "D:\Programme\Autodesk\VREDPro-13.3\bin\WIN64\VREDPro.exe" "C:\ProgramData\Autodesk\VREDPro-13.3\examples\Automotive_Genesis.vpb" -prepython "print('---');print('Executed before file has loaded')" -postpython "print('---');print('Executed after file has loaded')"

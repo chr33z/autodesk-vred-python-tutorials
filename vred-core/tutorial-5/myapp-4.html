@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>My Custom App</title>
+        <style>
+            html, body {
+                padding: 0;
+                margin: 0;
+                width: 100vw;
+                height: 100vh;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+            }
+
+            #page {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #stream-container {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            .python-interface {
+                padding: 1em 2em;
+                position: absolute;
+                right: 1em;
+                bottom: 1em;
+                background-color: #2d2d2d;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .python-send-wrapper {
+                margin-bottom: 0.5em;
+            }
+
+            .python-send-wrapper > input {
+                width: 25em;
+            }
+
+            textarea#python-response {
+                height: 10em;
+                resize: none;
+            }
+
+        </style>
+        <script>
+            var host = "localhost";
+            var port = "8888";
+
+            function initializeStream() {
+                document.getElementById("stream-container").src = 'http://' + host + ':' + port + '/apps/VREDStream/index.html';
+            }
+            
+            function updateVariantSets() {
+                sendAndReceivePython("getVariantSets()", 
+                (response) => {
+                    console.log(response);
+                }
+                );
+            }
+
+            function executeTerminalCode(python) {
+                console.log(python);
+                sendAndReceivePython(python, 
+                    (response) => {
+                        var text = document.getElementById('python-response').value;
+                        text += '\n' + response;
+                        document.getElementById('python-response').value = text;
+                    }, 
+                    (error) => console.error("Error sending pyhton command.", python)
+                );
+            }
+
+            function sendAndReceivePython(command, successCallback, errorCallback) {
+                var http = new XMLHttpRequest();
+                var url = 'http://' + host + ':' + port + '/pythoneval2?value=' + encodeURI(command);
+                http.open('GET', url, true);
+                http.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if(this.responseText && successCallback) {
+                            successCallback(this.responseText)
+                        }
+                    }
+                };
+                http.onerror = function() {
+                    if(errorCallback) {
+                        errorCallback();
+                    }
+                }
+                http.send();
+            }
+
+            
+            window.onload = function() {
+                initializeStream();
+                updateVariantSets();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="page">
+            <!-- Variant Set Container -->
+            <div id="variant-set-container"></div>
+
+            <!-- Video Stream Container -->
+            <iframe id="stream-container" frameborder="0" overflow="hidden" scroll="no"></iframe> 
+
+            <!-- Python Terminal Container -->
+            <div class="python-interface">
+                <div class="python-send-wrapper">
+                    <input id="python-value" type="text" placeholder="Enter your python code..."></input>
+                    <button onclick="executeTerminalCode(document.getElementById('python-value').value)">Send Python</button>
+                </div>
+                <textarea id="python-response"></textarea>
+            </div>
+        </div>
+    </body>
+</html>

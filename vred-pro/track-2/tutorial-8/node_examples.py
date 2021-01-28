@@ -2,18 +2,27 @@
 # Finding Nodes
 
 # Finding nodes with API v1 and v2
-targetNode_v1 = findNode('Target')
-targetNode_v2 = vrNodeService.findNode('Target')
+study_NodePtr = findNode('Study_Transform')
+study_vrdNode = vrNodeService.findNode('Study_Transform')
 
 # Example 2.0
-# Using API v1 functions
-createNode("Transform", "ChidlOfTarget", targetNode_v1)
-createNode("Transform", "ChidlOfTarget", targetNode_v2)
+# Using API v1 functions with vrdNodes
+createNode("Group", "Interieur_nodePtr", study_NodePtr)
+print("Created new group with nodePtr")
 
-# Using API v2 functions
-camera = vrCameraService.getActiveCamera()
-camera.adjustAtPosition(targetNode_v1)
-camera.adjustAtPosition(targetNode_v2)
+createNode("Group", "Interieur_vrdNode", study_vrdNode)
+print("Created new group with vrdNode")
+
+updateScenegraph(True)
+
+
+# Using API v2 functions with vrNodePtrs
+interieur_NodePtr = findNode('Interieur_nodePtr')
+
+childIndex = study_vrdNode.getChildIndex(interieur_NodePtr)
+
+print("Interieur Node is at index:", childIndex)
+
 
 # Example 3.0
 # Convert from nodePtr to vrdNode

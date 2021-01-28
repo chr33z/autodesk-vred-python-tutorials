@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Custom App</title>
+
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="styles.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <div id="page">
+            <!-- Variant Set Container -->
+            <div id="variant-set-container"></div>
+
+            <!-- Video Stream Container -->
+            <iframe id="stream-container" frameborder="0" overflow="hidden" scroll="no"></iframe> 
+
+            <!-- Python Terminal Container -->
+            <div class="python-interface">
+                <div class="python-send-wrapper">
+                    <input id="python-value" type="text" placeholder="Enter your python code..."></input>
+                    <button onclick="executeTerminalCode(document.getElementById('python-value').value)">Send Python</button>
+                </div>
+                <textarea id="python-response"></textarea>
+            </div>
+        </div>
+    </body>
+</html>

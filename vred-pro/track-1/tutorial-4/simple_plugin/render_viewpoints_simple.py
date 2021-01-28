@@ -44,6 +44,6 @@ def renderViewpoints():
         vrRenderSettings.setRenderFilename("{}.jpg".format(name))
         vrRenderSettings.startRenderToFile(False)
 
-if __name__ == "__main__":
-    dialog = CustomDialog(vredMainWindow())
-    dialog.show()
+
+dialog = CustomDialog(vredMainWindow())
+dialog.show()

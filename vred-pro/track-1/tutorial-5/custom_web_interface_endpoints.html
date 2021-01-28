@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8"/>
         <script>
+            // Send a generic python command without return value
             function sendPythonCommand(command) {
                 var http = new XMLHttpRequest();
-                var url = 'http://localhost:8888/pythonapi?value=' + encodeURI(command);
+                var url = 'http://localhost:8888/python?value=' + encodeURI(command);
                 http.open('GET', url, true);
                 http.send();
             }
 
-            function loadVariantSets() {
+            // Send a python command with expecting a return value
+            function sendPythonCommandWithReturnValue(command) {
                 var http = new XMLHttpRequest();
-                var url = 'http://localhost:8888/variants?value=getVariantSets';
+                var url = 'http://localhost:8888/pythoneval2?value=' + encodeURI(command);
                 http.open('GET', url, true);
                 http.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        var variantSets = JSON.parse(this.responseText);
-                        console.log(variantSets);
+                        var response = eval(this.responseText);
+                        console.log(response);
                     }
                 };
                 http.send();
             }
 
+            // Write a message to the terminal
             function logInfo(message) {
                 sendPythonCommand("logInfo('"+message+"')");
             }
 
+            // Select a variant set 
             function selectVariantSet(variantSet) {
                 sendPythonCommand("selectVariantSet('"+variantSet+"')");
+            }
+
+            // get all viewpoints
+            function getViewpoints() {
+                sendPythonCommandWithReturnValue('getViewpoints()');
             }
         </script>
     </head>
     <body>
         <!-- Defining your custom python actions -->
         <button onclick="logInfo('This is a message')">Print Info Message</button>
+
         <button onclick="selectVariantSet('Black Metallic')">Variant: Select Black Metallic</button>
-        <button onclick="loadVariantSets()">Request Variant Sets</button>
+
+        <button onclick="getViewpoints()">Request Viewpoints</button>
     </body>
 </html>

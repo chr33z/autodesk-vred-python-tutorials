@@ -1,9 +1,11 @@
 import math
 
 # Example 1.0
-# Creating a camera using API v2 and setting its fov to 35
-camera_v2 = vrCameraService.createCamera("Camera v2")
-camera_v2.setFocalLength(35)
+# Get active camera with vrCameraService
+camera = vrCameraService.getActiveCamera()
+
+# Set Focal Length
+camera.setFocalLength(35)
 
 
 # Example 2.0
