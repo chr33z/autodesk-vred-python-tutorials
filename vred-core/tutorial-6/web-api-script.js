@@ -34,16 +34,16 @@ function addEventMessage(message) {
 }
 
 // Adds a new list item to the unordered list #annotations.
-function addAnnotationItem(name, description, deleteCallback) {
+// function addAnnotationItem(name, description, deleteCallback) {
+function addAnnotationItem(name, description) {
   let item = undefined;
   if (name) {
     item = document.createElement("li");
     const nameItem = document.createElement("strong");
     nameItem.appendChild(document.createTextNode(name));
     item.appendChild(nameItem);
-  }
-  else {
-      return;
+  } else {
+    return;
   }
 
   if (description) {
@@ -52,16 +52,16 @@ function addAnnotationItem(name, description, deleteCallback) {
     item.appendChild(descriptionItem);
   }
 
-  if (deleteCallback) {
+//   if (deleteCallback) {
     const link = document.createElement("a");
     link.href = `?delete=${name}`;
     link.appendChild(document.createTextNode("( X )"));
     link.onclick = (e) => {
-      deleteCallback();
+        deleteAnnotation(name);
       e.preventDefault();
     };
     item.appendChild(link);
-  }
+//   }
 
   document.getElementById("annotations").appendChild(item);
 }
@@ -86,22 +86,13 @@ function loadAnnotations() {
 
   api.vrAnnotationService
     .getAnnotations()
-    .then((vrdAnnotationNodes) =>
-      Promise.all(
-        vrdAnnotationNodes.map(async (a) => {
-          const name = await a.getName();
-          const description = await a.getText();
-          return { ...a, name, description };
-        })
-      )
-    )
     .then((annotations) => {
       if (annotations.length > 0) {
-        annotations.forEach((a) =>
-          addAnnotationItem(a.name, a.description, () =>
-            deleteAnnotation(a.name)
-          )
-        );
+        annotations.forEach(async (a) => {
+          const name = await a.getName();
+          const description = await a.getText();
+          addAnnotationItem(name, description);
+        });
       } else {
         addAnnotationItem("No annotations found.");
       }

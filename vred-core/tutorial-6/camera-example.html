@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web API Example: Create Camera</title>
+        
+        <!-- Web API Module -->
+        <script type="module">
+            import { api } from 'http://localhost:8888/api.js';
+
+            window.onload = function() {
+
+                // Use vrCameraService to create a camera in the scene
+                // Wait for the result and "then"...
+                api.vrCameraService.createCamera("New Custom Camera").then(async (vrdCamera) => {
+
+                    // ... set a new name for the camera...
+                    await vrdCamera.setName("New Custom Camera - Changed Name");
+
+                    // ... and set the camera active
+                    await vrdCamera.activate();
+
+                    // Test
+                    api.vrCameraService.getCameraNames().then((names) => {
+                        window.alert(names.join('\n'));
+                    })
+                });
+            }
+        </script>
+    </head>
+</html>
+<body>
+</body>
