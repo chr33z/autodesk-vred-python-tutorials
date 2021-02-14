@@ -1,0 +1,1 @@
+VREDCore.exe "C:\ProgramData\Autodesk\VREDPro-13.3\examples\Automotive_Genesis.vpb" -postpython="from watermark_module import *; addWatermark(\"Autodesk\")"

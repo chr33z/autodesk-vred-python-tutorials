@@ -1,0 +1,5 @@
+VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); save(\"C:/VRED_Examples/Design_Study.fbx\"); terminateVred()"
+
+load(\"C:/VRED_Examples/Design_Study.vpb\")
+save(\"C:/VRED_Examples/Design_Study.fbx\")
+terminateVred()

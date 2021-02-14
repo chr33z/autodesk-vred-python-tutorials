@@ -1,0 +1,21 @@
+# With createScreenshot
+VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); createSnapshot("C:/VRED_Examples/screenshot.jpg", 1920, 1080); terminateVred()"
+
+
+# With Rendersettings
+VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); setRenderPixelResolution(1920, 1080, 300); setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\"); startRenderToFile(False); terminateVred()"
+
+load(\"C:/VRED_Examples/Design_Study.vpb\")
+setRenderPixelResolution(1920, 1080, 300)
+setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\")
+startRenderToFile(False)
+terminateVred()
+
+# With Rendersettings and Preset
+VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); applyPreset(\"Production_Quality\"); setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\"); startRenderToFile(False); terminateVred()"
+
+load(\"C:/VRED_Examples/Design_Study.vpb\")
+applyPreset(\"Production_Quality\")
+setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\")
+startRenderToFile(False)
+terminateVred()
