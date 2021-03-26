@@ -1,5 +1,5 @@
-VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); save(\"C:/VRED_Examples/Design_Study.fbx\"); terminateVred()"
+./VREDCore.exe -postpython="load(\"C:/VRED_Examples/vpb/Example.vpb\"); save(\"C:/VRED_Examples/fbx/Example.fbx\"); terminateVred()"
 
-load(\"C:/VRED_Examples/Design_Study.vpb\")
-save(\"C:/VRED_Examples/Design_Study.fbx\")
+load(\"C:/VRED_Examples/Example.vpb\")
+save(\"C:/VRED_Examples/Example.fbx\")
 terminateVred()

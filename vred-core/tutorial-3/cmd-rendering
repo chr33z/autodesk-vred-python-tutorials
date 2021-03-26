@@ -1,20 +1,26 @@
+# Start batch rendering with different quality settings
+
 # With createScreenshot
-VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); createSnapshot("C:/VRED_Examples/screenshot.jpg", 1920, 1080); terminateVred()"
+./VREDCore.exe -postpython="load(\"C:/VRED_Examples/Example.vpb\"); createSnapshot(\"C:/VRED_Examples/rendering/screenshot_3.jpg\", 1920, 1080); terminateVred()"
+
+load(\"C:/VRED_Examples/Example.vpb\");
+createSnapshot("C:/VRED_Examples/rendering/screenshot_3.jpg", 1920, 1080);
+terminateVred()
 
 
 # With Rendersettings
-VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); setRenderPixelResolution(1920, 1080, 300); setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\"); startRenderToFile(False); terminateVred()"
+./VREDCore.exe -postpython="load(\"C:/VRED_Examples/Example.vpb\"); setRenderPixelResolution(1920, 1080, 300); setRenderFilename(\"C:/VRED_Examples/rendering/screenshot_2.jpg\"); startRenderToFile(False); terminateVred()"
 
-load(\"C:/VRED_Examples/Design_Study.vpb\")
+load(\"C:/VRED_Examples/Example.vpb\")
 setRenderPixelResolution(1920, 1080, 300)
 setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\")
 startRenderToFile(False)
 terminateVred()
 
 # With Rendersettings and Preset
-VREDCore.exe -postpython="load(\"C:/VRED_Examples/Design_Study.vpb\"); applyPreset(\"Production_Quality\"); setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\"); startRenderToFile(False); terminateVred()"
+./VREDCore.exe -postpython="load(\"C:/VRED_Examples/Example.vpb\"); applyPreset(\"Production_Quality\"); setRenderFilename(\"C:/VRED_Examples/rendering/screenshot_1.jpg\"); startRenderToFile(False); terminateVred()"
 
-load(\"C:/VRED_Examples/Design_Study.vpb\")
+load(\"C:/VRED_Examples/Example.vpb\")
 applyPreset(\"Production_Quality\")
 setRenderFilename(\"C:/VRED_Examples/screenshot.jpg\")
 startRenderToFile(False)
