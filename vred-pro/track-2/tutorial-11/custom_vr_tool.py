@@ -25,7 +25,6 @@ def turntableToolEnabled():
 # Function to disable the turntable and clear the scene
 def turntableToolDisabled():
     print("Disable Turntable Tool")
-    global originalRotation
     global turntableInterpolator
 
     if turntableInterpolator:

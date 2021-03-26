@@ -52,16 +52,14 @@ function addAnnotationItem(name, description) {
     item.appendChild(descriptionItem);
   }
 
-//   if (deleteCallback) {
-    const link = document.createElement("a");
-    link.href = `?delete=${name}`;
-    link.appendChild(document.createTextNode("( X )"));
-    link.onclick = (e) => {
-        deleteAnnotation(name);
-      e.preventDefault();
-    };
-    item.appendChild(link);
-//   }
+  const link = document.createElement("a");
+  link.href = `?delete=${name}`;
+  link.appendChild(document.createTextNode("( X )"));
+  link.onclick = (e) => {
+    deleteAnnotation(name);
+    e.preventDefault();
+  };
+  item.appendChild(link);
 
   document.getElementById("annotations").appendChild(item);
 }
