@@ -1,9 +1,7 @@
-import sys
 import base64
 import subprocess
 import os
 
-# batchRenderingScript = '''
 print("=[VRED Core Tutorial] Batch Data Conversion")
 
 vredCorePath = r'D:\Programme\Autodesk\VREDCore-13.3\bin\WIN64\VREDCore.exe'
@@ -36,4 +34,3 @@ for filename in os.listdir(sourceDirectory):
         subprocess.call([vredCorePath, '-prepython=load("{}"); save("{}"); terminateVred()'.format(sourcePath, targetPath)])
 
 print("=[VRED Core Tutorial] Finished Batch Data Conversion...")
-

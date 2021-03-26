@@ -4,11 +4,7 @@ import subprocess
 
 vredCorePath = r'D:\Programme\Autodesk\VREDCore-13.3\bin\WIN64\VREDCore.exe'
 
-# Defined a python script as a string
-# This python script will run inside VRED
 batchRenderingScript = '''
-print("=[VRED Core Tutorial] Batch Rendering")
-
 vredSceneFile = r"C:/ProgramData/Autodesk/VREDPro-13.3/examples/Automotive_Genesis.vpb"
 variants = ("Black Metallic", "Blue Fire Metallic", "Silver Dark Metallic")
 viewpoints = ("Home", "Left-Back", "Viewpoint")
@@ -27,7 +23,7 @@ for viewpointName in viewpoints:
             vrVariants.selectVariantSet(variantName)
             createSnapshot(pathTemplate.format(viewpoint=viewpointName, variant=variantName), 1920, 1080)
 
-print("=[VRED Core Tutorial] Finished Rendering...")
+print("End")
 '''
 
 # Convert python script to base64, in order to import it into VRED
