@@ -1,11 +1,17 @@
 from vrKernelServices import vrSceneplateTypes
 from vrKernelServices import vrdSceneplateNode
 
+# Get reference to sceneplate types
 NodeType = vrSceneplateTypes.NodeType
 ContentType = vrSceneplateTypes.ContentType
 PositionType = vrSceneplateTypes.Position
 
+
 def addWatermark(text):
+    '''
+    Add a watermark with a text to your scene
+    '''
+    print("Create Watermark")
     sceneplateRoot = vrSceneplateService.getRootNode()
     watermarkNode = vrSceneplateService.createNode(sceneplateRoot, NodeType.Frontplate, "Watermark")
     watermark = vrdSceneplateNode(watermarkNode)
